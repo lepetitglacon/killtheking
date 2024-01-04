@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser-arcade-physics.min.js"></script>
+</head>
+<body>
+
+<script>
+    class Example extends Phaser.Scene
+    {
+        hoverButton = 'Hello phaser'
+        normalButton = 'Hello trouduc'
+
+
+        preload ()
+        {
+            this.quests = [
+                {
+                    id: 0,
+                    title: 'Quète 1',
+                    description: 'La description de la première quète',
+                    mefiance: 4,
+                    or: 2,
+                    scenes: [
+                        {
+                            id: 0,
+                            title: 'SCene initiale',
+                            description: 'Allé viens, on est bien',
+                            buttons: [
+                                {
+                                    title: "Partir à l'aventure",
+                                    goTo: 1
+                                }
+                            ]
+                        },
+                        {
+                            id: 1,
+                            title: 'quete',
+                            description: ' les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.',
+                            buttons: [
+                                {
+                                    title: "Voir ta grand mère",
+                                    goTo: 2
+                                }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            title: 'quete 2',
+                            description: ' assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n\'a pas fait que survivre cinq siècles, mais s\'est a',
+                            buttons: [
+                                {
+                                    title: "Aller pecher",
+                                    goTo: 3
+                                },
+                                {
+                                    title: "Mourir",
+                                    goTo: 999
+                                }
+                            ]
+                        },
+                        {
+                            id: 3,
+                            title: 'quete 3',
+                            description: 'st intéressé à un des mots latins les plus obscurs, consectetur, extrait d\'un passage du Lorem Ipsum, et en étudiant tous les usages de ce mot dans la littérature classique, découvrit la source incontestable du Lo',
+                            buttons: [
+                                {
+                                    title: "Rentrer à la maison",
+                                    goTo: 1
+                                }
+                            ]
+                        },
+                        {
+                            id: 999,
+                            title: 'Aie',
+                            description: 'Vous êtes mort',
+                            buttons: [
+                                {
+                                    title: "Revivre",
+                                    goTo: 0
+                                }
+                            ]
+                        },
+                    ]
+                }
+            ]
+
+        }
+
+        create ()
+        {
+            // this.add.image(400, 300, 'sky');
+
+            this.sceneTitle = this.add.text(100, 100, this.normalButton, { fill: '#0f0' });
+            this.sceneDescription = this.add.text(100, 200, this.normalButton, { fill: '#0f0' });
+            this.sceneButtons = []
+
+            this.loadQuest()
+        }
+
+        loadQuest(id) {
+            const quest = this.findQuest(id ?? 0)
+            this.quest = quest
+            this.loadScene(0)
+        }
+
+        loadScene(id) {
+
+            if (this.sceneButtons.length > 0) {
+                for (const button of this.sceneButtons) {
+                    button.destroy()
+                }
+            }
+
+            const scene = this.findScene(id ?? 0)
+            this.sceneTitle.setText(scene.title)
+            this.sceneDescription.setText(scene.description)
+            this.loadButtons(scene)
+        }
+
+        loadButtons(scene) {
+            let buttonCount = 0
+            for (const button of scene.buttons) {
+                const nextSceneButton = this.add.text(
+                    100,
+                    300 + (buttonCount * 100),
+                    button.title,
+                    { fill: '#0f0', padding: 15, backgroundColor: '#333' }
+                );
+                nextSceneButton.setInteractive({ useHandCursor: true })
+                nextSceneButton.on('pointerdown', () => this.loadScene(button.goTo) )
+                this.sceneButtons.push(nextSceneButton)
+                buttonCount++
+            }
+        }
+
+        findScene(id) {
+            return this.quest.scenes.filter(el => el.id === id)[0]
+        }
+
+        findQuest(id) {
+            return this.quests.filter(el => el.id === id)[0]
+        }
+    }
+
+    const config = {
+        type: Phaser.AUTO,
+        width: window.innerWidth,
+        height: window.innerHeight,
+        scene: Example,
+        physics: {
+            default: 'arcade',
+            arcade: {
+                gravity: { y: 200 }
+            }
+        }
+    };
+
+    const game = new Phaser.Game(config);
+</script>
+
+</body>
+</html>
