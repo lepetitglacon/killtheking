@@ -1,0 +1,90 @@
+[
+  {
+    "id": 0,
+    "title": "Quète 1",
+    "description": "La description de la première quète",
+    "mefiance": 4,
+    "or": 2,
+    "scenes": [
+      {
+        "id": 0,
+        "title": "Scene initiale",
+        "description": "Allé viens, on est bien",
+        "pnj": {
+          "left": "klok",
+          "right": "fin"
+        },
+        "buttons": [
+          {
+            "title": "Partir à l'aventure",
+            "goTo": 1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "title": "Scene 1",
+        "description": " les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.",
+        "pnj": {
+          "left": null,
+          "right": "fin"
+        },
+        "buttons": [
+          {
+            "title": "Voir ta grand mère",
+            "goTo": 2
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Scene 2",
+        "description": " assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est a",
+        "pnj": {
+          "left": null,
+          "right": null
+        },
+        "buttons": [
+          {
+            "title": "Aller pecher",
+            "goTo": 3
+          },
+          {
+            "title": "Mourir",
+            "goTo": 999
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Scene 3",
+        "description": "st intéressé à un des mots latins les plus obscurs, consectetur, extrait d'un passage du Lorem Ipsum, et en étudiant tous les usages de ce mot dans la littérature classique, découvrit la source incontestable du Lo",
+        "pnj": {
+          "left": "fin",
+          "right": "klok"
+        },
+        "buttons": [
+          {
+            "title": "Rentrer à la maison",
+            "goTo": 1
+          }
+        ]
+      },
+      {
+        "id": 999,
+        "title": "Aie",
+        "description": "Vous êtes mort",
+        "pnj": {
+          "left": "fin",
+          "right": "klok"
+        },
+        "buttons": [
+          {
+            "title": "Revivre",
+            "goTo": 0
+          }
+        ]
+      }
+    ]
+  }
+]
